@@ -14,7 +14,6 @@ jobs:
     permissions:
       id-token: write   # This is required for requesting the JWT
     steps:
-
       # https://github.com/aws-actions/configure-aws-credentials
       - uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -28,3 +27,4 @@ jobs:
           env | grep AWS_
           aws sts get-caller-identity
           aws secretsmanager list-secrets
+          unset AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN
