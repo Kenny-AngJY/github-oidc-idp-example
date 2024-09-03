@@ -19,3 +19,14 @@ variable "audience" {
   type        = string
   default     = "sts.amazonaws.com"
 }
+
+variable "namespace" {
+  type    = string
+  default = "Kenny-AngJY"
+}
+
+variable "project_name" {
+  description = "The name of your repository"
+  type        = string
+  default     = "github-oidc-idp-example"
+}

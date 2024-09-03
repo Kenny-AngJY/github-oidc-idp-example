@@ -41,7 +41,7 @@ resource "aws_iam_role" "test_role" {
         "Condition" : {
           "StringLike" : {
             "${var.provider_url}:sub" : [
-              "repo:Kenny-AngJY/github-oidc-idp-example:*"
+              "repo:${var.namespace}/${var.project_name}:*"
             ]
           },
           "StringEquals" : {
