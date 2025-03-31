@@ -26,7 +26,7 @@ resource "aws_iam_openid_connect_provider" "github" {
 #   id = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:oidc-provider/${var.provider_url}"
 # }
 
-resource "aws_iam_role" "test_role" {
+resource "aws_iam_role" "OIDC" {
   name = "GitHub-OIDC-role"
 
   assume_role_policy = jsonencode({
@@ -45,11 +45,15 @@ resource "aws_iam_role" "test_role" {
             ]
           },
           "StringEquals" : {
-            "${var.provider_url}:aud" : "${var.audience}"
+            "${var.provider_url}:aud" : var.audience
           }
         }
       }
     ]
   })
-  managed_policy_arns = ["arn:aws:iam::aws:policy/AdministratorAccess"]
+}
+
+resource "aws_iam_role_policy_attachment" "OIDC" {
+  role       = aws_iam_role.OIDC.name
+  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
 }
